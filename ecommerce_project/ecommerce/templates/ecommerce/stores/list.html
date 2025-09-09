@@ -1,0 +1,20 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<h2>Stores</h2>
+<div class="store-grid">
+    {% if stores %}
+        {% for store in stores %}
+            <div class="card store-card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ store.name }}</h5>
+                    <p class="card-text">{{ store.description|truncatewords:20 }}</p>
+                    <a href="{% url 'ecommerce:store_detail' store.id %}" class="btn btn-primary">View Products</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No stores found.</p>
+    {% endif %}
+</div>
+{% endblock %}

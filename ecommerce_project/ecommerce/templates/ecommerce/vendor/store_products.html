@@ -1,0 +1,40 @@
+{% extends 'ecommerce/base.html' %}
+{% load static %}
+
+{% block title %}{{ store.name }} - Products{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="h3 fw-bold">
+                <i class="fas fa-boxes me-2"></i>{{ store.name }} Products
+            </h1>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for product in products %}
+        <div class="col-md-4 col-sm-6">
+            <div class="card h-100">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ product.name }}">
+                {% else %}
+                <img src="{% static 'ecommerce/img/no-image.png' %}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="No image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="fw-bold">${{ product.price }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <div class="alert alert-info text-center">
+                <i class="fas fa-info-circle me-1"></i>No products available for this store.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

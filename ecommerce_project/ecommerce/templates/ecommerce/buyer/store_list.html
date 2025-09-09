@@ -1,0 +1,29 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}Stores - eCommerce{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="mb-4">All Stores</h1>
+
+    {% if stores %}
+        <div class="row">
+            {% for store in stores %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ store.name }}</h5>
+                            <p class="card-text">{{ store.description|truncatewords:15 }}</p>
+                            <a href="{% url 'ecommerce:store_detail' store.id %}" class="btn btn-primary">
+                                View Products
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No stores available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}
